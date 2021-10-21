@@ -1,6 +1,6 @@
 {
 	"name": "@breathlessway/potato-cli",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "vue3 template generate commander cli",
 	"main": "dist/index.js",
 	"bin": {
