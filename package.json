@@ -1,6 +1,6 @@
 {
 	"name": "@breathlessway/potato-cli",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "vue3 template generate commander cli",
 	"main": "dist/index.js",
 	"bin": {
@@ -15,7 +15,7 @@
 		"clear-all": "rimraf dist package-lock.json node_modules template/*/node_modules template/*/package-lock.json template/*/yarn.lock",
 		"clean": "rimraf dist",
 		"prepublishOnly": "npm run build",
-		"deploy": "npm run release && git push --follow-tags origin master && npm publish --access public",
+		"deploy": "npm run release && git push --follow-tags origin main && npm publish --access public",
 		"am": "git add . && cz && git push",
 		"lint": "lint-staged",
 		"docs": "doctoc README.md"
