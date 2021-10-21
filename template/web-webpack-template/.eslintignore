@@ -1,0 +1,9 @@
+dist
+tests
+coverage
+public
+scripts
+dll
+
+vue.config.js
+*.d.ts

@@ -1,0 +1,5 @@
+dist
+bin
+template
+node_modules
+.tsbuildinfo

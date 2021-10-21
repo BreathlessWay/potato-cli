@@ -1,0 +1,18 @@
+export type <%- ModuleName %>StateType = {};
+
+export const <%- ModuleName %>ModuleActions = {};
+
+type <%- ModuleName %>ModuleActionsType = typeof <%- ModuleName %>ModuleActions;
+
+type <%- ModuleName %>ModuleActionsKeyType = keyof <%- ModuleName %>ModuleActionsType;
+
+type <%- ModuleName %>ModuleDispatchesType = {
+	[key in <%- ModuleName %>ModuleActionsKeyType]: `<%- SpaceName %>/${<%- ModuleName %>ModuleActionsType[key]}`;
+};
+
+export const <%- ModuleName %>ModuleDispatches: <%- ModuleName %>ModuleDispatchesType = {} as <%- ModuleName %>ModuleDispatchesType;
+
+for (const p in <%- ModuleName %>ModuleActions) {
+	const v = <%- ModuleName %>ModuleActions[p as <%- ModuleName %>ModuleActionsKeyType];
+  <%- ModuleName %>ModuleDispatches[p as <%- ModuleName %>ModuleActionsKeyType] = `<%- SpaceName %>/${v}` as unknown as never;
+}

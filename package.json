@@ -1,0 +1,88 @@
+{
+	"name": "@breathlessway/potato-cli",
+	"version": "0.0.1",
+	"description": "vue3 template generate commander cli",
+	"main": "dist/index.js",
+	"bin": {
+		"potato": "bin/potato"
+	},
+	"scripts": {
+		"prepare": "husky install && chmod 700 .husky/*",
+		"release": "standard-version",
+		"link": "npm link --force",
+		"build": "npm run clean && tsc",
+		"dev": "tsc --watch",
+		"clear-all": "rimraf dist package-lock.json node_modules template/*/node_modules template/*/package-lock.json template/*/yarn.lock",
+		"clean": "rimraf dist",
+		"prepublishOnly": "npm run build",
+		"deploy": "npm run release && git push --follow-tags origin master && npm publish --access public",
+		"am": "git add . && cz && git push",
+		"lint": "lint-staged",
+		"docs": "doctoc README.md"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/BreathlessWay/potato-cli.git"
+	},
+	"keywords": [
+		"vue",
+		"vue-router",
+		"vuex",
+		"webpack",
+		"vite",
+		"typescript"
+	],
+	"author": "BreathlessWay <731005087@qq.com>",
+	"license": "ISC",
+	"dependencies": {
+		"@babel/generator": "^7.15.4",
+		"@babel/parser": "^7.15.7",
+		"@babel/template": "^7.15.4",
+		"@babel/traverse": "^7.15.4",
+		"@babel/types": "^7.15.6",
+		"chalk": "^4.1.2",
+		"commander": "^8.2.0",
+		"ejs": "^3.1.6",
+		"glob": "^7.1.7",
+		"highlight.js": "^11.2.0",
+		"inquirer": "^8.1.5",
+		"markdown-it": "^12.2.0",
+		"mem-fs": "^2.2.1",
+		"mem-fs-editor": "^9.3.0",
+		"module-alias": "^2.2.2",
+		"shelljs": "^0.8.4"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^13.1.0",
+		"@commitlint/config-conventional": "^13.1.0",
+		"@types/babel__generator": "^7.6.3",
+		"@types/babel__template": "^7.4.1",
+		"@types/inquirer": "^8.1.2",
+		"@types/markdown-it": "^12.2.1",
+		"@types/mem-fs": "^1.1.2",
+		"@types/mem-fs-editor": "^7.0.1",
+		"@types/progress": "^2.0.5",
+		"@types/shelljs": "^0.8.9",
+		"@typescript-eslint/eslint-plugin": "^4.31.2",
+		"@typescript-eslint/parser": "^4.31.2",
+		"commitizen": "^4.2.4",
+		"cz-customizable": "^6.3.0",
+		"doctoc": "^2.0.1",
+		"eslint": "^7.32.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-prettier": "^4.0.0",
+		"husky": "^7.0.2",
+		"lint-staged": "^11.1.2",
+		"prettier": "^2.4.0",
+		"rimraf": "^3.0.2",
+		"standard-version": "^9.3.1",
+		"typescript": "^4.4.3"
+	},
+	"_moduleAliases": {
+		"@": "dist"
+	},
+	"engines": {
+		"node": ">=14.14.0",
+		"npm": "<=6.14.15"
+	}
+}

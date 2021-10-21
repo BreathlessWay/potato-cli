@@ -1,0 +1,6 @@
+dist
+docs
+node_modules
+public
+
+src/pages/NotFound

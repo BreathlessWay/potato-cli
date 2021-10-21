@@ -1,0 +1,15 @@
+import { Module } from 'vuex';
+import { <%- ModuleName %>ModuleActions, <%- ModuleName %>StateType } from '@/store/<%- StoreName %>/types';
+
+export default {
+	namespaced: true,
+	// 模块内容（module assets）
+	state: () => ({
+	}), // 模块内的状态已经是嵌套的了，使用 `namespaced` 属性不会对其产生影响
+	getters: {
+	},
+	actions: {
+	},
+	mutations: {
+	},
+} as Module<<%- ModuleName %>StateType, never>;

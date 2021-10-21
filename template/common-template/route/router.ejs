@@ -1,0 +1,32 @@
+import { RouteRecordRaw } from 'vue-router';
+
+export enum <%- RouterName %>RoutesName {
+	<%- EnumPageName %> = '<%- EnumPageName %>',
+}
+
+const <%- RouterName %>Routes: RouteRecordRaw[] = [
+	{
+		path: '/<%- RouterPath %>',<% if (!RouterType) { %>
+		name: <%- RouterName %>RoutesName.<%- EnumPageName %>,
+		meta: {
+				requireAuth: false,
+				title: '<%- PageName %>',
+		},<% } %>
+		component: () => import(/* webpackChunkName: "<%- ChunkName %>" */ '../pages/<%- PagePath %>'),<% if (RouterType) { %>
+		children: [
+			{
+					path: '',
+					name: <%- RouterName %>RoutesName.<%- EnumPageName %>,
+					meta: {
+							requireAuth: false,
+							title: '<%- PageName %>',
+					},
+					component: {
+							template: '<div><%- PageName %></div>',
+					},
+			},
+		]<% } %>
+	},
+];
+
+export default <%- RouterName %>Routes;

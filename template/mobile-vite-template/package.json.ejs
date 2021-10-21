@@ -1,0 +1,94 @@
+{
+	"name": "<%= ProjectName %>",
+    "version": "0.0.1",
+	"description": "<%= Description %>",
+	"author": "<%= Author %>",
+	"private": true,
+	"scripts": {
+        "start": "npm run start:dev",
+        "build": "rimraf dist && vue-tsc --noEmit && vite build",
+        "serve": "vite preview",
+        "start:dev": "vite --mode dev",
+        "start:uat": "vite --mode uat",
+        "start:pre": "vite --mode pre",
+        "start:prod": "vite --mode prod",
+        "build:dev": "node scripts/generateVersion.js dev",
+        "build:uat": "node scripts/generateVersion.js uat",
+        "build:pre": "node scripts/generateVersion.js pre",
+        "build:prod": "node scripts/generateVersion.js prod",
+        "gen:dev": "npm run build -- --mode dev",
+        "gen:uat": "npm run build -- --mode uat",
+        "gen:pre": "npm run build -- --mode pre",
+        "gen:prod": "npm run build -- --mode prod",
+        "am": "git add . && cz && git push",
+        "lint:script": "eslint --fix --cache --max-warnings 0 && prettier --write",
+        "lint:style": "stylelint --fix --cache --cache-location node_modules/.cache/stylelint/",
+        "tree": "echo '```' > tree.md && tree >> tree.md -I 'node_modules' -F",
+        "analyze": "cross-env ANALYZE=true npm run build:prod"
+	},
+	"dependencies": {
+        "classnames": "2.3.1",
+        "core-js": "3.18.3",
+        "dayjs": "1.10.7",
+        "lodash-es": "4.17.21",
+        "secure-ls": "1.2.6",
+        "vant": "3.2.5",
+        "vue": "3.2.20",
+        "vue-router": "4.0.11",
+        "vue-virtual-scroll-list": "2.3.2",
+        "vuex": "4.0.2",
+        "vuex-persistedstate": "4.1.0"
+	},
+	"devDependencies": {
+        "@commitlint/cli": "^13.1.0",
+        "@commitlint/config-conventional": "^13.1.0",
+        "@originjs/vite-plugin-commonjs": "^1.0.1",
+        "@types/jest": "^27.0.2",
+        "@types/lodash-es": "^4.17.5",
+        "@types/node": "^16.11.1",
+        "@typescript-eslint/eslint-plugin": "^4.31.1",
+        "@typescript-eslint/parser": "^4.31.1",
+        "@vitejs/plugin-legacy": "^1.6.2",
+        "@vitejs/plugin-vue": "^1.9.3",
+        "@vitejs/plugin-vue-jsx": "^1.2.0",
+        "@vue/eslint-config-prettier": "^6.0.0",
+        "@vue/eslint-config-typescript": "^7.0.0",
+        "commitizen": "^4.2.4",
+        "cross-env": "^7.0.3",
+        "cz-customizable": "^6.3.0",
+        "eslint": "^7.30.0",
+        "eslint-plugin-prettier": "^3.4.0",
+        "eslint-plugin-vue": "^7.17.0",
+        "husky": "^7.0.2",<%
+        if (CSS == 'less') { %>
+        "less": "^4.1.1",<% } %>
+        "lint-staged": "^11.1.2",
+        "postcss-preset-env": "^6.7.0",
+        "postcss-px-to-viewport": "^1.1.1",
+        "postcss-viewport-units": "^0.1.6",
+        "prettier": "^2.4.0",
+        "rimraf": "^3.0.2",
+        "rollup-plugin-visualizer": "^5.5.2",<%
+        if (CSS == 'scss') { %>
+        "sass": "^1.40.0",<% } %>
+        "stylelint": "^13.0.0",
+        "stylelint-config-prettier": "^8.0.2",
+        "stylelint-config-recess-order": "^2.5.0",
+        "stylelint-config-standard": "^22.0.0",<%
+        if (CSS == 'scss') { %>
+        "stylelint-scss": "^3.21.0",<% } %>
+        "typescript": "^4.4.3",
+        "vite": "^2.6.4",
+        "vite-plugin-checker": "^0.3.4",
+        "vite-plugin-html": "^2.1.1",
+        "vite-plugin-style-import": "^1.2.1",
+        "vue-tsc": "^0.3.0"
+	},
+    "engines": {
+        "node": ">=14.14.0",
+        "npm": "<=6.14.15"
+    },
+	"css": "<%= CSS %>",
+    "path": "<%= ProjectName %>",
+    "browser": "<%= ProjectType %>"
+}

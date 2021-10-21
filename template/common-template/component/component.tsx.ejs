@@ -1,0 +1,22 @@
+import { defineComponent, ref, reactive, onMounted } from 'vue';
+
+import { useRouter } from '@/hooks/route';
+import { useStore } from '@/hooks/store';
+<% if( ComponentCssModule && ComponentType === 'TSX' ) { %>
+import Style from './style.module.<%- CSS %>';
+<% }  %><% if( !ComponentCssModule && ComponentType === 'TSX' ) {%>
+import './style.<%- CSS %>';
+<% } %>
+export default defineComponent({
+	name: '<%- ComponentName %>',
+	components: {},
+	setup() {
+		const store = useStore(),
+			router = useRouter();
+
+		onMounted(() => {});
+<% if (ComponentType==='TSX') { %>
+		return () => <section><%- ComponentName %></section>;<% } %><% if (ComponentType==='SFC') { %>
+		return {};<% } %>
+	},
+});

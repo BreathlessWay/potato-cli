@@ -1,0 +1,6 @@
+dist
+docs
+node_modules
+template
+.husky
+.tsbuildinfo

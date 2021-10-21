@@ -1,0 +1,6 @@
+<% if (ComponentType==='SFC') { %><template>
+	<section><%- ComponentName %></section>;
+</template><% } %><% if (ComponentType==='SFC') { %>
+<script lang="ts" src="./script.ts"></script><% } %>
+<% if (ComponentType==='SFC') { %><style lang="<%- CSS %>"<% if (ComponentCssModule) { %> scoped<% } %>>
+</style><% } %>
