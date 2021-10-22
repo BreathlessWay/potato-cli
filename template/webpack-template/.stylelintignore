@@ -1,0 +1,12 @@
+# .gitignore syntax (uses node-ignore behind the scenes)
+src/pages/NotFound
+dist
+
+**/*.md
+**/*.js
+**/*.jsx
+**/*.tsx
+**/*.ts
+**/*.json
+**/*.ejs
+**/*.png

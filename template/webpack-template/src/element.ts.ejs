@@ -1,0 +1,12 @@
+<% if(ProjectType==='mobile') {%>import { Badge } from 'vant';
+
+<% } %>import { App } from 'vue';
+
+const element = {
+	install: (app: App<Element>) => {<%
+    if(ProjectType==='mobile') {%>
+		app.component('MuiBadge', Badge);<% } %>
+	},
+};
+
+export default element;

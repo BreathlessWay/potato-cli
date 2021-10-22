@@ -1,4 +1,0 @@
-{
-    "*.{vue,ts,js,tsx,jsx}": [ "npm run lint:script" ],
-    "*.{vue,css,less,scss}": [ "npm run lint:style" ]
-}

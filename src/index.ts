@@ -2,7 +2,6 @@
 import 'module-alias/register';
 // template路径初始化
 process.env.TEMPLATE_DIR = '';
-process.env.TEMPLATE_SRC_DIR = '';
 
 import { Command } from 'commander';
 
@@ -21,12 +20,10 @@ import packageJson from '../package.json';
 
 const cli = new Command();
 cli
-	.description(
-		normalChalk('一个用来创建基于 vue3 的 h5/web 的 webpack/vite 项目的脚手架')
-	)
-	.version(packageJson.version, '-v, --version', 'potato版本信息')
-	.option('-d, --doc', '查看potato文档')
-	.option('-u, --upgrade', '升级potato')
+	.description(normalChalk('一个用来创建基于 vue3 的 h5/web 项目的脚手架'))
+	.version(packageJson.version, '-v, --version', 'mars版本信息')
+	.option('-d, --doc', '查看mars文档')
+	.option('-u, --upgrade', '升级mars')
 	.option('-i, --init <projectName>', '创建项目')
 	.option('-ac, --add-component <componentName>', '添加组件')
 	.option('-ar, --add-router <routerName>', '添加路由文件')
@@ -66,7 +63,7 @@ cli
 	.on('--help', () => {
 		lineSpaceLog();
 		console.log('Example call:');
-		console.log('  $ potato --help');
+		console.log('  $ mars --help');
 		lineSpaceLog();
 	})
 	.showHelpAfterError()

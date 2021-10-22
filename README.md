@@ -1,3 +1,13 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Potato](#potato)
+  - [简介](#%E7%AE%80%E4%BB%8B)
+  - [命令介绍](#%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D)
+  - [注意 ⚠️](#%E6%B3%A8%E6%84%8F-)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Potato
 
 ## 简介

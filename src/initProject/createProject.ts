@@ -1,20 +1,25 @@
-import { resolve, parse } from 'path';
+import { parse, resolve } from 'path';
 
 import shell from 'shelljs';
 import glob from 'glob';
 
 import { lineSpaceLog, normalLog } from '@/log';
-import { deleteFile, parseAndDeleteTemp, validFile } from '@/utils';
-import { copyDirectory, getProjectPath, installCmd } from '@/initProject/utils';
+import { deleteFile, parseAndDeleteTemp } from '@/utils';
+import { copyDirectory, installCmd, renameFile } from '@/initProject/utils';
 
-import { ECss, EProjectConfig } from '@/initProject/constants';
+import {
+	ECss,
+	EProjectCli,
+	EProjectConfig,
+	EProjectType,
+	FileNeedRemove,
+	HtmlTemplatePath,
+} from '@/initProject/constants';
 
 export const createProject = async (
-	projectConfig: Record<EProjectConfig, string>
+	projectConfig: Record<EProjectConfig, string>,
+	projectPath: string
 ) => {
-	const projectPath = getProjectPath(projectConfig[EProjectConfig.ProjectName]);
-	await validFile(projectPath);
-
 	normalLog('> 开始创建项目');
 	await copyDirectory(process.env.TEMPLATE_DIR, projectPath);
 	const templateFileList = glob.sync('**/*.ejs', {
@@ -32,9 +37,29 @@ export const createProject = async (
 		})
 	);
 
-	let deleteFileList: Array<string> = glob.sync('**/*.template', {
-		cwd: projectPath,
-	});
+	let deleteFileList: Array<string> = [];
+	const sourceHtmlPath = resolve(
+			projectPath,
+			HtmlTemplatePath[projectConfig[EProjectConfig.ProjectCli] as EProjectCli][
+				projectConfig[EProjectConfig.ProjectType] as EProjectType
+			]
+		),
+		targetHtmlPath = resolve(
+			projectPath,
+			HtmlTemplatePath[projectConfig[EProjectConfig.ProjectCli] as EProjectCli]
+				.target
+		);
+
+	if (projectConfig[EProjectConfig.ProjectType] === EProjectType.WEB) {
+		FileNeedRemove[EProjectType.WEB].forEach(_ => {
+			deleteFileList.push(resolve(projectPath, _));
+		});
+	}
+	if (projectConfig[EProjectConfig.ProjectType] === EProjectType.MOBILE) {
+		FileNeedRemove[EProjectType.MOBILE].forEach(_ => {
+			deleteFileList.push(resolve(projectPath, _));
+		});
+	}
 	if (projectConfig[EProjectConfig.CSS] === ECss.Less) {
 		deleteFileList = deleteFileList.concat(
 			glob.sync('**/*.scss', { cwd: projectPath })
@@ -44,6 +69,10 @@ export const createProject = async (
 		deleteFileList = deleteFileList.concat(
 			glob.sync('**/*.less', { cwd: projectPath })
 		);
+	}
+
+	if (sourceHtmlPath) {
+		await renameFile(sourceHtmlPath, targetHtmlPath);
 	}
 
 	await Promise.all(

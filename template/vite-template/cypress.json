@@ -1,0 +1,7 @@
+{
+  "baseUrl": "http://localhost:5050",
+  "component": {
+    "componentFolder": "src",
+    "testFiles": "**/tests/*.spec.{js,ts,jsx,tsx}"
+  }
+}

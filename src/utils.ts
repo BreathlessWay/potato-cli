@@ -1,4 +1,3 @@
-import { resolve } from 'path';
 import { access, constants, rm } from 'fs';
 
 import inquirer from 'inquirer';
@@ -8,37 +7,7 @@ import * as editor from 'mem-fs-editor';
 
 import { errorChalk, errorLog, lineSpaceLog, normalLog } from '@/log';
 
-import {
-	EProjectType,
-	MobileWebpackTemplateDir,
-	WebWebpackTemplateDir,
-	MobileViteTemplateDir,
-	WebViteTemplateDir,
-	Override,
-	ProjectSrcPath,
-} from '@/constants';
-import { EProjectCli } from '@/initProject/constants';
-
-export const calcTemplatePath = (
-	projectType: EProjectType,
-	projectCli: EProjectCli
-) => {
-	const templateMap = {
-		[`${EProjectType.WEB}_${EProjectCli.WEBPACK}`]: WebWebpackTemplateDir,
-		[`${EProjectType.WEB}_${EProjectCli.VITE}`]: WebViteTemplateDir,
-		[`${EProjectType.MOBILE}_${EProjectCli.WEBPACK}`]: MobileWebpackTemplateDir,
-		[`${EProjectType.MOBILE}_${EProjectCli.VITE}`]: MobileViteTemplateDir,
-	};
-
-	process.env.TEMPLATE_DIR = templateMap[`${projectType}_${projectCli}`];
-	if (process.env.TEMPLATE_DIR) {
-		process.env.TEMPLATE_SRC_DIR = resolve(process.env.TEMPLATE_DIR, 'src');
-	}
-
-	if (!process.env.TEMPLATE_DIR || !process.env.TEMPLATE_SRC_DIR) {
-		throw '未能确认当前项目是移动端还是web端，请确认 package.json 中是否有 browser 字段';
-	}
-};
+import { Override, ProjectSrcPath } from '@/constants';
 
 // macos和windows是忽略文件大小写的
 export const isFileExist = (path: string) =>
@@ -131,7 +100,7 @@ export const validFile = async (filePath: string) => {
 	if (exist) {
 		const override = await inquirer.prompt(overrideQuestion);
 		if (override[Override]) {
-			normalLog('> 正在删除原文件');
+			normalLog('> 正在删除原文件...');
 			await deleteFile(filePath);
 			normalLog('> 删除原文件成功');
 		} else {

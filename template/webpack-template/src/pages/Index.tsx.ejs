@@ -1,0 +1,34 @@
+import { defineComponent, onMounted, ref } from 'vue';
+<% if(ProjectType==='mobile') {%>
+import { Cell, Stepper, Toast } from 'vant';
+<% } %>
+export default defineComponent({
+	name: 'Index',
+	setup() {
+		const role = ref('BM1');
+		onMounted(() => {<% if(ProjectType==='mobile') {%>
+			Toast('提示内容');<% } %>
+		});
+
+		const handleClick = () => {
+			role.value = role.value === 'BM1' ? 'AM1' : 'BM1';
+		};
+
+		return () => (
+			<section><%
+                if(ProjectType==='mobile') {%>
+                <Cell v-role:BM1={role.value} title='单元格2' value='内容1' />
+				<br />
+				<Stepper />
+				<br />
+				<br />
+				<button onClick={handleClick}>权限</button><% } %><%
+                if(ProjectType==='web') {%>
+                <div v-role={{ value: 'BM1', arg: role.value }}>内容1</div>
+                <br />
+                <br />
+                <button onClick={handleClick}>权限</button><% } %>
+            </section>
+		);
+	},
+});

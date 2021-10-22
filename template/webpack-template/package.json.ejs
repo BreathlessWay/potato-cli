@@ -1,0 +1,114 @@
+{
+	"name": "<%= ProjectName %>",
+    "version": "0.0.1",
+	"description": "<%= Description %>",
+	"author": "<%= Author %>",
+	"private": true,
+	"scripts": {
+        "start": "npm run start:dev",
+        "start:dev": "vue-cli-service serve --mode dev",
+        "start:uat": "vue-cli-service serve --mode uat",
+        "start:pre": "vue-cli-service serve --mode pre",
+        "start:prod": "vue-cli-service serve --mode prod",
+        "build:dev": "node scripts/generateVersion.js dev",
+        "build:uat": "node scripts/generateVersion.js uat",
+        "build:pre": "node scripts/generateVersion.js pre",
+        "build:prod": "node scripts/generateVersion.js prod",
+        "gen:dev": "cross-env NODE_ENV=production vue-cli-service build --mode dev",
+        "gen:uat": "cross-env NODE_ENV=production vue-cli-service build --mode uat",
+        "gen:pre": "cross-env NODE_ENV=production vue-cli-service build --mode pre",
+        "gen:prod": "cross-env NODE_ENV=production vue-cli-service build --mode prod",
+        "spm": "cross-env SPEED_MEASURE=true npm run build:prod",
+        "analyze": "cross-env ANALYZE=true npm run build:prod",
+        "test:unit": "vue-cli-service test:unit",
+        "test:unit-w": "vue-cli-service test:unit --watch",
+        "test:e2e": "vue-cli-service test:e2e",
+        "dll": "vue-cli-service dll",
+        "am": "git add . && cz && git push",
+        "lint": "vue-cli-service lint ",
+        "lint:style": "vue-cli-service lint:style",
+        "pretty": "prettier --write",
+        "eject": "vue inspect > .webpack.config",
+        "tree": "echo '```' > tree.md && tree >> tree.md -I 'node_modules' -F"
+	},
+	"dependencies": {
+        "axios": "0.23.0",
+        "classnames": "2.3.1",
+        "core-js": "3.18.3",
+        "dayjs": "1.10.7",
+        "lodash-es": "4.17.21",
+        "secure-ls": "1.2.6",<% if(ProjectType==='mobile') {%>
+        "vant": "3.2.5",<% } %>
+        "vue": "3.2.20",
+        "vue-router": "4.0.11",
+        "vue-virtual-scroll-list": "2.3.2",
+        "vuex": "4.0.2",
+        "vuex-persistedstate": "4.1.0"
+	},
+	"devDependencies": {
+        "@commitlint/cli": "^13.1.0",
+        "@commitlint/config-conventional": "^13.1.0",
+        "@samhammer/vue-cli-plugin-stylelint": "^2.1.0",
+        "@types/jest": "^24.0.19",
+        "@types/lodash-es": "^4.17.5",
+        "@typescript-eslint/eslint-plugin": "^4.31.1",
+        "@typescript-eslint/parser": "^4.31.1",
+        "@vue/cli-plugin-babel": "^4.5.13",
+        "@vue/cli-plugin-e2e-cypress": "^4.5.13",
+        "@vue/cli-plugin-eslint": "^4.5.13",
+        "@vue/cli-plugin-router": "^4.5.13",
+        "@vue/cli-plugin-typescript": "^4.5.13",
+        "@vue/cli-plugin-unit-jest": "^4.5.13",
+        "@vue/cli-plugin-vuex": "^4.5.13",
+        "@vue/cli-service": "^4.5.13",
+        "@vue/compiler-sfc": "^3.2.11",
+        "@vue/eslint-config-prettier": "^6.0.0",
+        "@vue/eslint-config-typescript": "^7.0.0",
+        "@vue/test-utils": "^2.0.0-0",
+        "babel-plugin-import": "^1.13.3",
+        "commitizen": "^4.2.4",
+        "cross-env": "^7.0.3",
+        "cz-customizable": "^6.3.0",
+        "eslint": "^7.30.0",
+        "eslint-plugin-prettier": "^3.4.0",
+        "eslint-plugin-vue": "^7.17.0",
+        "glob": "^7.1.7",<%
+        if (CSS == 'less') { %>
+        "less": "^4.1.1",
+        "less-loader": "7.3.0",<% } %>
+        "lint-staged": "^11.1.2",
+        "postcss-preset-env": "^6.7.0",<%
+        if(ProjectType==='mobile') {%>
+        "postcss-px-to-viewport": "^1.1.1",
+        "postcss-viewport-units": "^0.1.6",<% } %>
+        "prettier": "^2.4.0",
+        "purgecss-webpack-plugin": "^4.0.3",<%
+        if (CSS == 'scss') { %>
+        "sass": "^1.40.0",
+        "sass-loader": "10.2.0",<% } %>
+        "speed-measure-webpack-plugin": "^1.5.0",
+        "style-resources-loader": "^1.4.1",
+        "stylelint": "^13.0.0",
+        "stylelint-config-prettier": "^8.0.2",
+        "stylelint-config-recess-order": "^2.5.0",
+        "stylelint-config-standard": "^22.0.0",<%
+        if (CSS == 'scss') { %>
+        "stylelint-scss": "^3.21.0",<% } %>
+        "tslib": "^2.3.1",
+        "typescript": "^4.4.3",
+        "vue-cli-plugin-dll": "^1.1.12",
+        "vue-jest": "^5.0.0-0",
+        "webpack-bundle-analyzer": "^4.5.0"
+	},
+    "engines": {
+        "node": ">=14.14.0",
+        "npm": "<=6.14.15"
+    },
+    "gitHooks": {
+        "pre-commit": "lint-staged",
+        "commit-msg": "commitlint -E GIT_PARAMS"
+    },
+	"css": "<%= CSS %>",
+    "path": "<%= ProjectName %>",
+    "browser": "<%= ProjectType %>"
+}

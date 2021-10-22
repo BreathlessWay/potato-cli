@@ -1,0 +1,38 @@
+{
+	"root": true,
+	"env": {
+		"browser": true,
+		"node": true,
+		"es6": true,
+		"commonjs": true
+	},
+	"extends": [
+		"plugin:vue/vue3-strongly-recommended",
+		"eslint:recommended",
+		"@vue/typescript/recommended",
+		"@vue/prettier",
+		"@vue/prettier/@typescript-eslint"
+	],
+	"parserOptions": {
+		"ecmaVersion": 2020
+	},
+	"rules": {
+		"@typescript-eslint/explicit-module-boundary-types": "off",
+		"vue/require-default-prop": "off",
+		"@typescript-eslint/no-explicit-any": "off",
+		"@typescript-eslint/ban-types": "off"
+	},
+	"globals": {
+	},
+	"overrides": [
+		{
+			"files": [
+				"**/__tests__/*.{j,t}s?(x)",
+				"**/tests/unit/**/*.spec.{j,t}s?(x)"
+			],
+			"env": {
+				"jest": true
+			}
+		}
+	]
+}

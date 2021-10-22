@@ -6,16 +6,23 @@ import { projectQuestions } from '@/initProject/questions';
 import { createProject } from '@/initProject/createProject';
 
 import { configLog, lineSpaceLog, normalLog } from '@/log';
-import { calcTemplatePath, logErrorAndExit } from '@/utils';
+import { logErrorAndExit, validFile } from '@/utils';
+import { calcTemplatePath, getProjectPath } from '@/initProject/utils';
 
-import { EProjectType } from '@/constants';
-import { EProjectCli, EProjectConfig } from '@/initProject/constants';
+import {
+	EProjectCli,
+	EProjectConfig,
+	EProjectType,
+} from '@/initProject/constants';
 
 export const handleInitProject = async (projectName: string) => {
 	projectName = projectName.trim();
 	if (!shell.which('git')) {
 		logErrorAndExit('创建项目需要依赖git，请先安装git');
 	}
+
+	const projectPath = getProjectPath(projectName);
+	await validFile(projectPath);
 
 	normalLog('> 配置项目：');
 
@@ -32,5 +39,5 @@ export const handleInitProject = async (projectName: string) => {
 		projectConfig[EProjectConfig.ProjectType] as EProjectType,
 		projectConfig[EProjectConfig.ProjectCli] as EProjectCli
 	);
-	await createProject(projectConfig);
+	await createProject(projectConfig, projectPath);
 };

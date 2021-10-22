@@ -3,8 +3,12 @@ import inquirer from 'inquirer';
 
 import { questionChalk } from '@/log';
 
-import { EProjectType } from '@/constants';
-import { ECss, EProjectConfig, EProjectCli } from '@/initProject/constants';
+import {
+	ECss,
+	EProjectConfig,
+	EProjectCli,
+	EProjectType,
+} from '@/initProject/constants';
 
 export const projectQuestions: Array<inquirer.QuestionCollection> = [
 	{
