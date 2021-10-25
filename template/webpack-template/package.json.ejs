@@ -36,14 +36,18 @@
         "classnames": "2.3.1",
         "core-js": "3.18.3",
         "dayjs": "1.10.7",
-        "lodash-es": "4.17.21",
+        "lodash-es": "4.17.21",<%
+        if(ProjectStore==='pinia') {%>
+        "pinia": "2.0.0-rc.14",
+        "pinia-plugin-persist": "0.0.92",<% } %>
         "secure-ls": "1.2.6",<% if(ProjectType==='mobile') {%>
         "vant": "3.2.5",<% } %>
         "vue": "3.2.20",
         "vue-router": "4.0.11",
-        "vue-virtual-scroll-list": "2.3.2",
+        "vue-virtual-scroll-list": "2.3.2"<%
+        if(ProjectStore==='vuex') {%>,
         "vuex": "4.0.2",
-        "vuex-persistedstate": "4.1.0"
+        "vuex-persistedstate": "4.1.0"<% } %>
 	},
 	"devDependencies": {
         "@commitlint/cli": "^13.1.0",

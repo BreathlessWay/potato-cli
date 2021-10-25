@@ -60,6 +60,7 @@
 	});
 	```
 6. [关于如何使用jsx，可以参考 vuejs/jsx-next](https://github.com/vuejs/jsx-next/blob/dev/packages/babel-plugin-jsx/README-zh_CN.md)
+7. 由于 `vuex` 在 `typescript` 下的糟糕表现，建议使用 [pinia](https://pinia.esm.dev/)，但是 `pinia` 暂不支持 `webpack`  下的热更新
 
 ## 注意 ⚠️
 

@@ -57,13 +57,11 @@ export const createProject = async (
 		deleteFileList.push(resolve(projectPath, _));
 	});
 
-	if (projectConfig[EProjectConfig.ProjectCli] === EProjectCli.VITE) {
-		FileNeedRemove[
-			projectConfig[EProjectConfig.ProjectStore] as EProjectStore
-		].forEach(_ => {
-			deleteFileList.push(resolve(projectPath, _));
-		});
-	}
+	FileNeedRemove[
+		projectConfig[EProjectConfig.ProjectStore] as EProjectStore
+	].forEach(_ => {
+		deleteFileList.push(resolve(projectPath, _));
+	});
 
 	if (projectConfig[EProjectConfig.CSS] === ECss.Less) {
 		deleteFileList = deleteFileList.concat(
