@@ -1,0 +1,31 @@
+import { defineStore, acceptHMRUpdate } from 'pinia';
+
+import { storageHandler } from '@/store/secure';
+
+import { PersistOptions } from 'pinia-plugin-persist';
+
+export const use<%- ModuleName %>Store = defineStore('<%- SpaceName %>', {
+	// a function that returns a fresh state
+	state: () => ({
+	}),
+	// optional getters
+	getters: {
+		// getters receive the state as first parameter
+	},
+	// optional actions
+	actions: {
+	},
+	persist: {
+		enabled: true,
+		strategies: [
+			{
+				key: 'store-<%- SpaceName %>',
+				storage: storageHandler,
+			},
+		],
+	} as PersistOptions,
+});
+
+if (import.meta.hot) {
+	import.meta.hot.accept(acceptHMRUpdate(use<%- ModuleName %>Store, import.meta.hot));
+}

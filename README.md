@@ -39,7 +39,7 @@
 
 1. macos 和 windows 是忽略文件名称大小写的，所以务必注意创建组件/路由/数据集时的文件名称大小写
 2. 文件路径都需要是 `POSIX` 风格的
-3. 路由和数据集都是依赖 `require.context / import.mate.globEager` 自动注册的，所以必须严格按照现有目录结构
+3. 路由和 **使用vuex的数据集** 都是依赖 `require.context / import.mate.globEager` 自动注册的，所以必须严格按照现有目录结构
    - 路由文件不能嵌套，只能为第一层文件，作为路由信息文件
    ```
    ├── router/
@@ -60,6 +60,7 @@
    │       └── type.ts
    │   ...
    ```
+   - 使用 `pinia` 的项目，数据集目录没有限制
 4. `node` 的最低版本 `v14.14.0`，`npm` 版本不能高于 **6**
 5. 在使用 `SourceTree` 提交代码时如果出现了 `Can't find npm` ，在用户根目录下创建 `.huskyrc` 文件，并在文件中写入如下内容，可以使用 `which node` 查找 `node` 位置
    ```
