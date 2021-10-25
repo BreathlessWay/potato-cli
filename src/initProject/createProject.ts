@@ -11,6 +11,7 @@ import {
 	ECss,
 	EProjectCli,
 	EProjectConfig,
+	EProjectStore,
 	EProjectType,
 	FileNeedRemove,
 	HtmlTemplatePath,
@@ -50,16 +51,20 @@ export const createProject = async (
 				.target
 		);
 
-	if (projectConfig[EProjectConfig.ProjectType] === EProjectType.WEB) {
-		FileNeedRemove[EProjectType.WEB].forEach(_ => {
+	FileNeedRemove[
+		projectConfig[EProjectConfig.ProjectType] as EProjectType
+	].forEach(_ => {
+		deleteFileList.push(resolve(projectPath, _));
+	});
+
+	if (projectConfig[EProjectConfig.ProjectCli] === EProjectCli.VITE) {
+		FileNeedRemove[
+			projectConfig[EProjectConfig.ProjectStore] as EProjectStore
+		].forEach(_ => {
 			deleteFileList.push(resolve(projectPath, _));
 		});
 	}
-	if (projectConfig[EProjectConfig.ProjectType] === EProjectType.MOBILE) {
-		FileNeedRemove[EProjectType.MOBILE].forEach(_ => {
-			deleteFileList.push(resolve(projectPath, _));
-		});
-	}
+
 	if (projectConfig[EProjectConfig.CSS] === ECss.Less) {
 		deleteFileList = deleteFileList.concat(
 			glob.sync('**/*.scss', { cwd: projectPath })

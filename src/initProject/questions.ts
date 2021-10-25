@@ -8,6 +8,7 @@ import {
 	EProjectConfig,
 	EProjectCli,
 	EProjectType,
+	EProjectStore,
 } from '@/initProject/constants';
 
 export const projectQuestions: Array<inquirer.QuestionCollection> = [
@@ -22,6 +23,14 @@ export const projectQuestions: Array<inquirer.QuestionCollection> = [
 		name: EProjectConfig.ProjectCli,
 		message: questionChalk('项目使用webpack还是vite？'),
 		choices: [EProjectCli.WEBPACK, EProjectCli.VITE],
+	},
+	{
+		type: 'list',
+		name: EProjectConfig.ProjectStore,
+		message: questionChalk(
+			'项目使用vuex还是pinia做为数据集管理？(目前只支持vite模板)'
+		),
+		choices: [EProjectStore.VUEX, EProjectStore.PINIA],
 	},
 	{
 		type: 'input',

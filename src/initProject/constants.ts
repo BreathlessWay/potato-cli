@@ -7,6 +7,7 @@ export enum EProjectConfig {
 	CSS = 'CSS',
 	ProjectType = 'ProjectType',
 	ProjectCli = 'ProjectCli',
+	ProjectStore = 'ProjectStore',
 }
 
 export enum ECss {
@@ -22,6 +23,11 @@ export enum EProjectType {
 export enum EProjectCli {
 	WEBPACK = 'webpack',
 	VITE = 'vite',
+}
+
+export enum EProjectStore {
+	PINIA = 'pinia',
+	VUEX = 'vuex',
 }
 
 export const WebpackTemplateDir = resolve(
@@ -60,4 +66,6 @@ export const FileNeedRemove = {
 		HtmlTemplatePath[EProjectCli.WEBPACK][EProjectType.WEB],
 		HtmlTemplatePath[EProjectCli.VITE][EProjectType.WEB],
 	],
+	[EProjectStore.PINIA]: ['src/hooks/store.ts', 'src/store/home'],
+	[EProjectStore.VUEX]: ['src/store/secure.ts', 'src/store/home.ts'],
 };

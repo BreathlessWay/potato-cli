@@ -40,7 +40,7 @@
    });
    ```
 5. [关于如何使用 jsx，可以参考 vuejs/jsx-next](https://github.com/vuejs/jsx-next/blob/dev/packages/babel-plugin-jsx/README-zh_CN.md)
-6. 由于 [vuex] 在 `typescript` 下比较糟糕的表现，所以使用 [pinia](https://pinia.esm.dev/) 替代
+6. 由于 `vuex` 在 `typescript` 下的糟糕表现，建议使用 [pinia](https://pinia.esm.dev/)
 
 ## 注意 ⚠️
 

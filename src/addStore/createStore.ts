@@ -24,7 +24,7 @@ export const createStore = async (storeName: string) => {
 			SpaceName: camelCase(storeName),
 		};
 
-	if (packageJson?.devDependencies?.vite) {
+	if (packageJson?.dependencies?.pinia) {
 		storePath = resolve(StoreTargetPath, `${storeName}.ts`);
 
 		await validFile(storePath);

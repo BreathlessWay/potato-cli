@@ -18,5 +18,5 @@ export const StoreTypeTemplatePath = resolve(
 
 export const StoreViteTemplatePath = resolve(
 	CommonTemplateDir,
-	'store/vite.ejs'
+	'store/pinia.ejs'
 );

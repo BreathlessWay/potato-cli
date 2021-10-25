@@ -1,12 +1,14 @@
 import { defineComponent, ref, reactive, onMounted } from 'vue';
 
-import { useRouter } from '@/hooks/route';
+import Item from '@/components/templates/Item.vue';
 
-import { useHomeStore } from '@/store/home';
+import { useRouter } from '@/hooks/route';<%
+if(ProjectStore==='pinia'){ %>
+import { useHomeStore } from '@/store/home';<% } %><%
+if(ProjectStore==='vuex'){ %>
+import { useStore } from '@/hooks/store';<% } %>
 
 import { AboutRoutesName } from '@/router/about';
-
-import Item from '@/components/templates/Item.vue';
 
 export default defineComponent({
 	components: {
@@ -14,11 +16,16 @@ export default defineComponent({
 	},
 	setup() {
 		const oItem = ref<InstanceType<typeof Item>>();
-
+        <%if(ProjectStore==='pinia'){ %>
 		const s = useHomeStore();
 
 		console.log('s.state', s.a);
+        <% } %><%
+        if(ProjectStore==='vuex'){ %>
+        const s = useStore();
 
+        console.log('s.state', s.state.home);
+        <% } %>
 		const m = reactive({
 			a: 1,
 		});
