@@ -1,9 +1,9 @@
 import { defineComponent, ref, reactive, onMounted } from 'vue';
 
 import { useRouter } from '@/hooks/route';
-import { useStore } from '@/hooks/store';
-
 import { AboutRoutesName } from '@/router/about';
+
+import { useHomeStore } from '@/store/home';
 
 import Item from '@/components/templates/Item.vue';
 
@@ -12,18 +12,18 @@ export default defineComponent({
 		item: Item,
 	},
 	setup() {
-		const oItem = ref(null);
+		const oItem = ref<InstanceType<typeof Item>>();
 
-		const s = useStore();
+		const s = useHomeStore();
 
-		console.log('s.state', s.state.home);
+		console.log('s.state', s.a);
 
 		const m = reactive({
 			a: 1,
 		});
 
 		onMounted(() => {
-			console.log('about', oItem);
+			console.log('about', oItem.value.title1);
 		});
 
 		const handleCC = (...args: Array<number>) => {
