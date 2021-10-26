@@ -12,7 +12,7 @@ export default defineComponent({
 		item: Item,
 	},
 	setup() {
-		const oItem = ref(null);
+		const oItem = ref<InstanceType<typeof Item>>();
 
 		const s = useStore();
 
@@ -23,7 +23,7 @@ export default defineComponent({
 		});
 
 		onMounted(() => {
-			console.log('about', oItem);
+			console.log('about', oItem.value?.aaa);
 		});
 
 		const handleCC = (...args: Array<number>) => {

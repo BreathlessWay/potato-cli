@@ -27,7 +27,6 @@ import Card from '@/components/templates/Card';
 import { useHomeStore } from '@/store/home';<% } %><%
 if(ProjectStore==='vuex'){ %>
 import { HomeModuleDispatches } from '@/store/home/types';
-import { RootState } from '@/store';
 <% } %>
 export default defineComponent({
 	data() {
@@ -41,12 +40,17 @@ export default defineComponent({
 		Card,
 	},
 	computed: {<%
-        if(ProjectStore==='pinia'){ %>
+      if(ProjectStore==='pinia'){ %>
 		...mapStores(useHomeStore),<% } %><%
-        if(ProjectStore==='vuex'){ %>
-        ...mapState({
-            homeStore: state => (state as RootState).home,
-        }),<% } %>
+      if(ProjectStore==='vuex'){ %>
+		...mapState({
+			// 传字符串参数 'home' 等同于 `state => state.home`
+			homeStore: 'home',
+			// 用函数需要使用如下写法，否则类型推断有问题
+			// homeStore(state: RootState) {
+			// 	return state.home;
+			// },
+		}),<% } %>
 	},
 	mounted() {
 		console.log(this.$http);

@@ -15,7 +15,7 @@ export default defineComponent({
 		item: Item,
 	},
 	setup() {
-        const oItem = ref(null);
+        const oItem = ref<InstanceType<typeof Item>>();
         <%if(ProjectStore==='pinia'){ %>
 		const s = useHomeStore();
 
@@ -31,7 +31,7 @@ export default defineComponent({
 		});
 
 		onMounted(() => {
-			console.log('about', oItem.value.title1);
+            console.log('about', oItem.value?.aaa);
 		});
 
 		const handleCC = (...args: Array<number>) => {
