@@ -1,6 +1,6 @@
-import '@/utils/axios-helper';
-
 import { createApp } from 'vue';
+
+import axiosRegister from '@/utils/axios-register';
 
 import App from '@/App.vue';
 
@@ -11,6 +11,8 @@ import element from '@/element';<%
 if(ProjectStore==='vuex') {%>
 
 import { key } from '@/hooks/store';<% } %>
+
+axiosRegister();
 
 const app = createApp(App)<%
     if(ProjectStore==='vuex') {%>
