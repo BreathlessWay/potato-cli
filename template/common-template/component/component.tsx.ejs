@@ -1,4 +1,4 @@
-import { defineComponent, ref, reactive, onMounted } from 'vue';
+import { defineComponent, onMounted } from 'vue';
 
 import { useRouter } from '@/hooks/route';
 <% if( ComponentCssModule && ComponentType === 'TSX' ) { %>
@@ -7,8 +7,9 @@ import Style from './style.module.<%- CSS %>';
 import './style.<%- CSS %>';
 <% } %>
 export default defineComponent({
-	name: '<%- ComponentName %>',
-	components: {},
+	name: '<%- ComponentName %>',<%
+	if (ComponentType==='SFC') { %>
+	components: {},<% } %>
 	setup() {
 		const router = useRouter();
 
