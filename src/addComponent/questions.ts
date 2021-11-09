@@ -4,22 +4,28 @@ import { questionChalk } from '@/log';
 
 import {
 	EComponentConfig,
-	EComponentPath,
+	EComponentPathPrefix,
 	EComponentType,
 } from '@/addComponent/constants';
 
 export const componentQuestions: Array<inquirer.QuestionCollection> = [
 	{
 		type: 'list',
-		name: EComponentConfig.ComponentPath,
+		name: EComponentConfig.ComponentPathPrefix,
 		message: questionChalk('请选择组件属性'),
 		choices: [
-			EComponentPath.pages,
-			EComponentPath.templates,
-			EComponentPath.organisms,
-			EComponentPath.molecules,
-			EComponentPath.atoms,
+			EComponentPathPrefix.pages,
+			EComponentPathPrefix.templates,
+			EComponentPathPrefix.organisms,
+			EComponentPathPrefix.molecules,
+			EComponentPathPrefix.atoms,
 		],
+	},
+	{
+		type: 'input',
+		name: EComponentConfig.ComponentPath,
+		message: questionChalk('请输入页面路径，默认为组件属性目录'),
+		default: '/',
 	},
 	{
 		type: 'list',

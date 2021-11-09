@@ -3,12 +3,13 @@ import { CommonTemplateDir } from '@/constants';
 
 export enum EComponentConfig {
 	ComponentName = 'ComponentName',
+	ComponentPathPrefix = 'ComponentPathPrefix',
 	ComponentPath = 'ComponentPath',
 	ComponentType = 'ComponentType',
 	ComponentCssModule = 'ComponentCssModule',
 }
 
-export enum EComponentPath {
+export enum EComponentPathPrefix {
 	pages = 'pages',
 	templates = 'templates',
 	organisms = 'organisms',

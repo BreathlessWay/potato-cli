@@ -1,4 +1,4 @@
-import { resolve } from 'path';
+import { join, resolve } from 'path';
 import { readFileSync, writeFileSync } from 'fs';
 
 import { lineSpaceLog, normalLog } from '@/log';
@@ -7,7 +7,7 @@ import { KebabCase, parseTemplate, validFile } from '@/utils';
 import { ProjectPackageJson, ProjectSrcPath } from '@/constants';
 import {
 	EComponentConfig,
-	EComponentPath,
+	EComponentPathPrefix,
 	EComponentType,
 	componentScriptPath,
 	componentTemplatePath,
@@ -17,17 +17,30 @@ export const createComponent = async (
 	componentConfig: Record<EComponentConfig, string>
 ) => {
 	const packageJson = JSON.parse(readFileSync(ProjectPackageJson, 'utf-8'));
-	// eslint-disable-next-line prefer-const
-	let { ComponentName, ComponentPath, ComponentType, ComponentCssModule } =
-		componentConfig;
+	let {
+		ComponentName,
+		ComponentPath,
+		// eslint-disable-next-line prefer-const
+		ComponentPathPrefix,
+		// eslint-disable-next-line prefer-const
+		ComponentType,
+		// eslint-disable-next-line prefer-const
+		ComponentCssModule,
+	} = componentConfig;
 
 	ComponentName = KebabCase(ComponentName);
-	if (ComponentPath === EComponentPath.pages) {
-		ComponentPath = resolve(ProjectSrcPath, ComponentPath, ComponentName);
+	if (ComponentPathPrefix === EComponentPathPrefix.pages) {
+		ComponentPath = join(
+			ProjectSrcPath,
+			ComponentPathPrefix,
+			ComponentPath,
+			ComponentName
+		);
 	} else {
-		ComponentPath = resolve(
+		ComponentPath = join(
 			ProjectSrcPath,
 			'components',
+			ComponentPathPrefix,
 			ComponentPath,
 			ComponentName
 		);
