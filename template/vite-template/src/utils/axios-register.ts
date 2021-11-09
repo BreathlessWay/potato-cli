@@ -80,7 +80,6 @@ const getTargetDate = (expire?: number | string) => {
  * @function 初始化axios配置
  * @description 初始化axios全局配置
  * @param {Object} [params] - 方法初始化参数
- * @param {String} [params.apiKey] - 请求头中所需携带的 X-Gaia-Api-Key
  * @param {String[]} [params.whitelist] - 需要被全局错误处理函数忽略的请求url
  * @param {AuthHook} [params.authHook] - 权限处理方法，当不传递时会有默认处理行为但不推荐，传false关闭权限钩子
  * @param {PromiseCallback} params.requestFailHook - 全局错误处理函数

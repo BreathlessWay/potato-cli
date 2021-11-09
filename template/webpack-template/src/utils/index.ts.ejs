@@ -18,7 +18,3 @@ export const getType = (data: any) =>
 		.call(data)
 		.match(/\s([a-zA-Z]+)/)?.[1]
 		.toLowerCase();
-
-export const validNumber = (params: any): boolean => {
-	return getType(params) === 'number' && !isNaN(params) && !isFinite(params);
-};

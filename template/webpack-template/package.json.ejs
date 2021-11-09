@@ -29,19 +29,30 @@
         "lint:style": "vue-cli-service lint:style",
         "pretty": "prettier --write",
         "eject": "vue inspect > .webpack.config",
-        "tree": "echo '```' > tree.md && tree >> tree.md -I 'node_modules' -F"
+        "tree": "echo '```' > tree.md && tree >> tree.md -I 'node_modules' -F"<% if(ProjectHttp==='graphql') {%>,
+        "schema": "apollo-codegen introspect-schema http://xx.xx.xx.xx:xx/graphql --output schema.json",
+        "type": "apollo-codegen generate src/apis/**/*.graphql --schema schema.json --target typescript --output src/apis/type.ts"<% } %>
 	},
-	"dependencies": {
-        "axios": "0.23.0",
+	"dependencies": {<%
+        if(ProjectHttp==='graphql') {%>
+        "@apollo/client": "3.4.16",
+        "@vue/apollo-composable": "4.0.0-alpha.15",
+        "@vue/apollo-util": "4.0.0-alpha.15",<% } %><%
+        if(ProjectHttp==='axios') {%>
+        "axios": "0.23.0",<% } %>
         "classnames": "2.3.1",
         "core-js": "3.18.3",
-        "dayjs": "1.10.7",
+        "dayjs": "1.10.7",<%
+        if(ProjectHttp==='graphql') {%>
+        "graphql": "16.0.0",
+        "graphql-tag": "2.12.5",<% } %>
         "lodash-es": "4.17.21",<%
         if(ProjectStore==='pinia') {%>
         "pinia": "2.0.0-rc.14",
         "pinia-plugin-persist": "0.0.92",<% } %>
         "qs": "6.10.1",
-        "secure-ls": "1.2.6",<% if(ProjectType==='mobile') {%>
+        "secure-ls": "1.2.6",<%
+        if(ProjectType==='mobile') {%>
         "vant": "3.2.5",<% } %>
         "vue": "3.2.20",
         "vue-router": "4.0.11",
@@ -78,7 +89,8 @@
         "eslint": "^7.30.0",
         "eslint-plugin-prettier": "^3.4.0",
         "eslint-plugin-vue": "^7.17.0",
-        "glob": "^7.1.7",<%
+        "glob": "^7.1.7",
+        "hard-source-webpack-plugin": "^0.13.1",<%
         if (CSS == 'less') { %>
         "less": "^4.1.1",
         "less-loader": "7.3.0",<% } %>

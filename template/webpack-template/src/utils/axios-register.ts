@@ -34,7 +34,7 @@ const getTargetDate = (expire?: number | string) => {
 		unit = result?.[2];
 
 	if (isNaN(num)) {
-		console.log(
+		console.info(
 			`%c过期时间 ${expire} 设置有误，本次请求不会缓存`,
 			'color: #ccd54d'
 		);
@@ -144,7 +144,7 @@ const axiosRegister = (
 	type source = `${'request' | 'response'}-${'fulfilled' | 'rejected'}`;
 	const failHandler = async (error: any, source: source) => {
 		if (axios.isCancel(error)) {
-			console.log(
+			console.info(
 				`%c重复的请求 ${error?.config?.url}，被取消，${error.message}`,
 				'color: purple'
 			);
@@ -157,7 +157,7 @@ const axiosRegister = (
 		}
 		// 优先使用 config 中的 ignoreFailCallback 跳过公共错误处理方法
 		if (error?.config?.ignoreFailCallback) {
-			console.log(
+			console.info(
 				`%c错误出现点：${source}，通过 ignoreFailCallback 忽略公共错误处理方法`,
 				'color: #d900ff'
 			);
@@ -166,7 +166,7 @@ const axiosRegister = (
 		// 其次使用 whitelist 跳过公共错误处理方法
 		const _url = error?.config?.url.split('?')?.[0];
 		if (_url && whitelist?.includes(_url)) {
-			console.log(
+			console.info(
 				`%c错误出现点：${source}，通过 whitelist 忽略公共错误处理方法`,
 				'color: #d900ff'
 			);
@@ -183,7 +183,7 @@ const axiosRegister = (
 		// `baseURL` will be prepended to `url` unless `url` is absolute.
 		// It can be convenient to set `baseURL` for an instance of axios to pass relative URLs
 		// to methods of that instance.
-		baseURL: '',
+		baseURL: '/api',
 
 		// `timeout` specifies the number of milliseconds before the request times out.
 		// If the request takes longer than `timeout`, the request will be aborted.
@@ -247,10 +247,10 @@ const axiosRegister = (
 			if (response?.config?.method === 'get') {
 				const cache = getCacheMap.get(key);
 				!cache &&
-					getCacheMap.set(key, {
-						expire: getTargetDate(response.config.expire),
-						result: response,
-					});
+				getCacheMap.set(key, {
+					expire: getTargetDate(response.config.expire),
+					result: response,
+				});
 			}
 
 			// Do something with response data
@@ -308,17 +308,17 @@ const axiosRegister = (
 		const cacheResult = getCacheMap.get(key);
 		if (cacheResult) {
 			if (cacheResult.expire > Date.now()) {
-				console.log(`%c当前请求 ${url} 缓存时间未到，使用缓存`, 'color: blue');
+				console.info(`%c当前请求 ${url} 缓存时间未到，使用缓存`, 'color: blue');
 				return cacheResult.result;
 			} else {
 				getCacheMap.delete(key);
-				console.log(
+				console.info(
 					`%c当前请求 ${url} 缓存时间已过，重新请求`,
 					'color: #5f9ea0'
 				);
 			}
 		} else {
-			console.log(`%c当前请求 ${url} 没有缓存，重新请求`, 'color: green');
+			console.info(`%c当前请求 ${url} 没有缓存，重新请求`, 'color: green');
 		}
 		return preAxiosGet.call(this, url, config);
 	};

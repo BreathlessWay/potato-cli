@@ -3,7 +3,9 @@ tests
 coverage
 public
 scripts
-dll
+dll<%
+if(ProjectHttp==='graphql') {%>
+**/*.graphql<% } %>
 
 vue.config.js
 *.d.ts

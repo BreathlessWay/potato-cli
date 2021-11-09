@@ -1,5 +1,3 @@
-export const isInAPP = ~window.navigator.userAgent.indexOf('MAIA');
-
 export const platforms = {
 	isAndroid: Boolean(navigator.userAgent.match(/android/gi)),
 	isIphone: Boolean(navigator.userAgent.match(/iphone|ipod/gi)),

@@ -5,6 +5,7 @@ const PurgeCSSPlugin = require('purgecss-webpack-plugin');
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 const BundleAnalyzerPlugin =
 	require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 const packageJson = require('./package.json');
 
@@ -46,6 +47,9 @@ module.exports = {
 				preserveHeaderKeyCase: true,
 				changeOrigin: true, // 是否跨域
 				secure: false,
+				pathRewrite: {
+					'^/api': '', // rewrite path
+				},
 				onProxyReq: function (proxyReq) {
 				},
 			},
@@ -64,7 +68,7 @@ module.exports = {
 		},
 	},
 	chainWebpack: config => {
-		if (process.env.NODE_ENV === 'production') {
+		config.when(process.env.NODE_ENV === 'production', config => {
 			// 错误监控上报映射 source-map
 			config.devtool('hidden-source-map');
 			// 清除无用css
@@ -73,20 +77,51 @@ module.exports = {
 					paths: glob.sync(`${srcPath}/**/*`, { nodir: true }),
 				},
 			]);
-		}
+			config.optimization.minimizer('terser').tap(args => {
+				args[0].terserOptions.compress.pure_funcs = ['console.log'];
+				return args;
+			});
+		});
 		config.plugins.delete('prefetch');
 
-		process.env.SPEED_MEASURE &&
+		if (process.env.SPEED_MEASURE) {
 			config
 				.plugin('speed-measure-webpack-plugin')
 				.use(SpeedMeasurePlugin)
 				.end();
+		} else {
+			config
+				.plugin('hard-source-webpack-plugin')
+				.use(HardSourceWebpackPlugin, [
+					{
+						environmentHash: {
+							root: process.cwd(),
+							directories: [],
+							files: ['package.json'],
+						},
+					},
+				])
+				.end();
+
+			config
+				.plugin('hard-source-webpack-plugin-exclude')
+				.use(HardSourceWebpackPlugin.ExcludeModulePlugin, [
+					[
+						{
+							// HardSource works with mini-css-extract-plugin but due to how
+							// mini-css emits assets, assets are not emitted on repeated builds with
+							// mini-css and hard-source together. Ignoring the mini-css loader
+							// modules, but not the other css loader modules, excludes the modules
+							// that mini-css needs rebuilt to output assets every time.
+							test: /mini-css-extract-plugin[\\/]dist[\\/]loader/,
+						},
+					],
+				])
+				.end();
+		}
 
 		process.env.ANALYZE &&
-			config
-				.plugin('webpack-bundle-analyzer')
-				.use(BundleAnalyzerPlugin)
-				.end();
+			config.plugin('webpack-bundle-analyzer').use(BundleAnalyzerPlugin).end();
 
 		// 每个文件引入公共文件
 		const types = ['vue-modules', 'vue', 'normal-modules', 'normal'];

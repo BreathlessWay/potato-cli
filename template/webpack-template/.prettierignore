@@ -3,5 +3,5 @@ docs
 node_modules
 public
 dll
-
+**/*.graphql
 src/pages/NotFound

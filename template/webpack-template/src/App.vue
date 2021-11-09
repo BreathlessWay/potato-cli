@@ -15,15 +15,6 @@
 	</section>
 </template>
 <script setup lang="ts">
-import { watch } from 'vue';
-import { useRoute } from 'vue-router';
-
-const router = useRoute();
-
-watch(router, () => {
-	console.log('transition', router.meta.transition);
-});
-
 // 发布时产生的版本信息，用于线上定位版本问题
 const buildDate = process.env.VUE_APP_BUILD_DATE;
 </script>

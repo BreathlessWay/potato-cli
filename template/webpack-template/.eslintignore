@@ -4,6 +4,6 @@ coverage
 public
 scripts
 dll
-
+**/*.graphql
 vue.config.js
 *.d.ts

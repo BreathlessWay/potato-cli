@@ -1,5 +1,6 @@
 import '@vue/runtime-core';
 import 'vue-router';
+
 import { Store } from 'vuex';
 
 import { RootState } from '@/store';
