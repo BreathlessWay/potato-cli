@@ -14,7 +14,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-
 import { mapStores } from 'pinia';
 
 import HelloWorld from '@/components/templates/HelloWorld.vue'; // @ is an alias to /src

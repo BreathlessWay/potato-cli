@@ -63,6 +63,12 @@ export const createProject = async (
 		deleteFileList.push(resolve(projectPath, _));
 	});
 
+	FileNeedRemove[
+		projectConfig[EProjectConfig.ProjectHttp] as EProjectType
+	].forEach(_ => {
+		deleteFileList.push(resolve(projectPath, _));
+	});
+
 	if (projectConfig[EProjectConfig.CSS] === ECss.Less) {
 		deleteFileList = deleteFileList.concat(
 			glob.sync('**/*.scss', { cwd: projectPath })

@@ -2,5 +2,6 @@ dist
 docs
 node_modules
 public
+**/*.graphql
 
 src/pages/NotFound

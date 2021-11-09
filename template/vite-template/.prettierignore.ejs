@@ -1,6 +1,8 @@
 dist
 docs
 node_modules
-public
-
-src/pages/NotFound
+public<%
+if(ProjectHttp==='graphql') {%>
+**/*.graphql<% } %><%
+if(ProjectType==='mobile') {%>
+src/pages/NotFound<% } %>

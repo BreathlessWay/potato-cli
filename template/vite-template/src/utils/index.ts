@@ -1,3 +1,5 @@
+export const isInAPP = ~window.navigator.userAgent.indexOf('MAIA');
+
 export const platforms = {
 	isAndroid: Boolean(navigator.userAgent.match(/android/gi)),
 	isIphone: Boolean(navigator.userAgent.match(/iphone|ipod/gi)),
@@ -18,7 +20,3 @@ export const getType = (data: any) =>
 		.call(data)
 		.match(/\s([a-zA-Z]+)/)?.[1]
 		.toLowerCase();
-
-export const validNumber = (params: any): boolean => {
-	return getType(params) === 'number' && !isNaN(params) && !isFinite(params);
-};

@@ -29,13 +29,23 @@
         "lint:style": "stylelint --fix --cache --cache-location node_modules/.cache/stylelint/",
         "tree": "echo '```' > tree.md && tree >> tree.md -I 'node_modules' -F",
         "analyze": "cross-env ANALYZE=true npm run build:prod",
-        "prepare": "husky install && chmod 700 .husky/*"
+        "prepare": "husky install && chmod 700 .husky/*"<% if(ProjectHttp==='graphql') {%>,
+        "schema": "apollo-codegen introspect-schema http://xx.xx.xx.xx:xx/graphql --output schema.json",
+        "type": "apollo-codegen generate src/apis/**/*.graphql --schema schema.json --target typescript --output src/apis/type.ts"<% } %>
 	},
-	"dependencies": {
-        "axios": "0.23.0",
+	"dependencies": {<%
+        if(ProjectHttp==='graphql') {%>
+        "@apollo/client": "3.4.16",
+        "@vue/apollo-composable": "4.0.0-alpha.15",
+        "@vue/apollo-util": "4.0.0-alpha.15",<% } %><%
+        if(ProjectHttp==='axios') {%>
+        "axios": "0.23.0",<% } %>
         "classnames": "2.3.1",
         "core-js": "3.18.3",
-        "dayjs": "1.10.7",
+        "dayjs": "1.10.7",<%
+        if(ProjectHttp==='graphql') {%>
+        "graphql": "16.0.0",
+        "graphql-tag": "2.12.5",<% } %>
         "lodash-es": "4.17.21",<%
         if(ProjectStore==='pinia') {%>
         "pinia": "2.0.0-rc.14",

@@ -28,17 +28,18 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
 
 	const analyze = process.env.ANALYZE;
 
-	console.log(env);
-
 	return {
 		base: `/${packageJson.path}/`,
 		publicDir: 'public',
 		clearScreen: false,
 		css: {
-			preprocessorOptions: {
-                <% if (CSS == 'scss') { %>scss: {
+			preprocessorOptions: {<%
+                if (CSS == 'scss') { %>
+                scss: {
 					additionalData: `$pre-color: red;`,
-				},<% } %><% if (CSS == 'less') { %>             less: {
+				},<% } %><%
+                if (CSS == 'less') { %>
+                less: {
 					modifyVars: ``,
 					javascriptEnabled: true,
 				},<% } %>
@@ -49,9 +50,9 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
 			open: true,
 			proxy: {
 				'/api': {
-					target: 'http://jsonplaceholder.typicode.com',
-					changeOrigin: true,
-					rewrite: path => path.replace(/^\/api/, ''),
+                    target: env.VITE_APP_BASE_URL,
+                    changeOrigin: true,
+                    rewrite: path => path.replace(/^\/api/, '/<%if(ProjectHttp==='graphql') {%>graphql<% } %><%if(ProjectHttp==='axios') {%>api<% } %>'),
 				},
 			},
 		},
@@ -61,6 +62,12 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
 			// Turning off brotliSize display can slightly reduce packaging time
 			brotliSize: false,
 			chunkSizeWarningLimit: 2000,
+            terserOptions: {
+                compress: {
+                    // Drop only console.logs but leave others
+                    pure_funcs: ['console.log'],
+                },
+            },
 		},
 		resolve: {
 			alias: {

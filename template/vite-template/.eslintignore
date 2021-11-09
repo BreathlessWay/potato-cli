@@ -5,3 +5,4 @@ public
 scripts
 
 *.d.ts
+cypress

@@ -8,6 +8,7 @@ export enum EProjectConfig {
 	ProjectType = 'ProjectType',
 	ProjectCli = 'ProjectCli',
 	ProjectStore = 'ProjectStore',
+	ProjectHttp = 'ProjectHttp',
 }
 
 export enum ECss {
@@ -28,6 +29,11 @@ export enum EProjectCli {
 export enum EProjectStore {
 	PINIA = 'pinia',
 	VUEX = 'vuex',
+}
+
+export enum EProjectHttp {
+	AXIOS = 'axios',
+	GRAPHQL = 'graphql',
 }
 
 export const WebpackTemplateDir = resolve(
@@ -68,4 +74,16 @@ export const FileNeedRemove = {
 	],
 	[EProjectStore.PINIA]: ['src/hooks/store.ts', 'src/store/home'],
 	[EProjectStore.VUEX]: ['src/store/secure.ts', 'src/store/home.ts'],
+	[EProjectHttp.AXIOS]: [
+		'.graphqlconfig',
+		'apollo.config.js',
+		'src/utils/apollo-client.ts',
+		'src/hooks/query.ts',
+		'src/apis/type.ts',
+		'src/apis/home',
+	],
+	[EProjectHttp.GRAPHQL]: [
+		'src/utils/axios-register.ts',
+		'src/utils/axios-register.md',
+	],
 };

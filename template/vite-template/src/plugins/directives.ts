@@ -1,7 +1,7 @@
 import { App } from 'vue';
 
 export const registerDirectives = (app: App<Element>) => {
-	app.directive('focus', (el) => {
+	app.directive('focus', el => {
 		el.focus();
 	});
 

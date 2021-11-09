@@ -40,7 +40,23 @@
    });
    ```
 5. [关于如何使用 jsx，可以参考 vuejs/jsx-next](https://github.com/vuejs/jsx-next/blob/dev/packages/babel-plugin-jsx/README-zh_CN.md)
-6. 由于 `vuex` 在 `typescript` 下的糟糕表现，建议使用 [pinia](https://pinia.esm.dev/)
+6. 由于 `vuex` 在 `typescript` 下的糟糕表现，建议使用 [pinia](https://pinia.esm.dev/) 
+7. 由于在入口文件进行了 `axios` 注册，所以在页面中直接 `import axios from 'axios'` 使用
+
+## Graphql
+
+1. 根据后端 `schema` 以及查询条件自动生成类型文件
+	- `npm install -g apollo-codegen`：全局安装代码生成器，**必须全局安装**
+	- `npm run schema`：获取后端定义的 `schema`
+	- `npm run type`：根据 `.graphql` 文件生成类型文件 `type.ts`
+2. [Vue Apollo](https://v4.apollo.vuejs.org/zh-cn/guide-composable/)
+3. 查询 `api` 都在 `src/apis` 目录下
+	- `index.ts`：查询接口调用文件
+	- `*.graphql`：查询所使用的 `graphql` 语句，主要用来在编辑器中直接启动，调试接口，生成类型
+	- `type.ts`：查询参数，以及返回结果的类型文件，根据 `*.graphql` 以及后端 `schema` 自动生成
+4. 禁止直接从 `@vue/apollo-composable` 中调用 `useQuery` 等方法
+  - `useQuery` 从 `src/hooks/query` 中调用 `useBasicQuery`
+  - 如需要其他 `useMutation` 等方法，自行在 `src/hooks` 中添加使用
 
 ## 注意 ⚠️
 

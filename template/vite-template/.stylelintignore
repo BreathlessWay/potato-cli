@@ -10,3 +10,6 @@ dist
 **/*.json
 **/*.ejs
 **/*.png
+**/*.graphql
+Jenkinsfile
+sonar-project.properties

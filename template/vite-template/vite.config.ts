@@ -62,6 +62,12 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
 			// Turning off brotliSize display can slightly reduce packaging time
 			brotliSize: false,
 			chunkSizeWarningLimit: 2000,
+			terserOptions: {
+				compress: {
+					// Drop only console.logs but leave others
+					pure_funcs: ['console.log'],
+				},
+			},
 		},
 		resolve: {
 			alias: {

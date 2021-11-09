@@ -9,6 +9,7 @@ import {
 	EProjectCli,
 	EProjectType,
 	EProjectStore,
+	EProjectHttp,
 } from '@/initProject/constants';
 
 export const projectQuestions: Array<inquirer.QuestionCollection> = [
@@ -27,10 +28,14 @@ export const projectQuestions: Array<inquirer.QuestionCollection> = [
 	{
 		type: 'list',
 		name: EProjectConfig.ProjectStore,
-		message: questionChalk(
-			'项目使用vuex还是pinia做为数据集管理？(目前只支持vite模板)'
-		),
+		message: questionChalk('项目使用vuex还是pinia做为数据集管理？'),
 		choices: [EProjectStore.VUEX, EProjectStore.PINIA],
+	},
+	{
+		type: 'list',
+		name: EProjectConfig.ProjectHttp,
+		message: questionChalk('项目使用axios还是apollo-graphql做为请求库？'),
+		choices: [EProjectHttp.AXIOS, EProjectHttp.GRAPHQL],
 	},
 	{
 		type: 'input',
@@ -48,7 +53,7 @@ export const projectQuestions: Array<inquirer.QuestionCollection> = [
 		type: 'input',
 		name: EProjectConfig.Description,
 		message: questionChalk('请输入项目描述'),
-		default: 'vue3 program',
+		default: 'turbo program',
 		validate: (input: string) => {
 			if (input && input.trim()) {
 				return true;

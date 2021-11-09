@@ -1,6 +1,6 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 
-import { storageHandle } from '@/store/secure';
+import { storageHandler } from '@/store/secure';
 
 import { PersistOptions } from 'pinia-plugin-persist';
 
@@ -33,7 +33,7 @@ export const useHomeStore = defineStore('home', {
 		strategies: [
 			{
 				key: 'store-home',
-				storage: storageHandle,
+				storage: storageHandler,
 			},
 		],
 	} as PersistOptions,
