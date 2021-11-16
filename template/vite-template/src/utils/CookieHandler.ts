@@ -1,5 +1,5 @@
 import GetType from '@/utils/validType';
-import { validObjectParams } from '@/utils/validParams';
+import { validNumberParams, validObjectParams } from '@/utils/validParams';
 
 type BasicCookieConfig = Partial<{
 	maxAge: string;
@@ -49,7 +49,7 @@ export default class CookieHandler {
 		try {
 			if (GetType.isString(expires)) {
 				const currentTime = new Date(expires);
-				if (!isNaN(currentTime.getTime())) {
+				if (validNumberParams(currentTime.getTime())) {
 					_expiresTime = currentTime.toUTCString();
 				}
 			}

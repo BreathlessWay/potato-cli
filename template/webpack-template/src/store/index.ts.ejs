@@ -11,15 +11,11 @@ import { HomeStateType } from '@/store/home/types';
 
 import { createStore, createLogger } from 'vuex';
 import createPersistence from 'vuex-persistedstate';
-import SecureLS from 'secure-ls';
+
+import { storageHandler } from '@/utils/secure';
 
 import packageJson from '../../package.json';
 
-const ls = new SecureLS({
-	isCompression: false,
-	encodingType: 'base64',
-	encryptionSecret: packageJson.name,
-});
 // 加载所有模块
 const loadModules = () => {
 	const context = require.context('./', true, /^\.\/?([a-z_]+)\/index\.ts$/i);
@@ -50,11 +46,7 @@ export interface RootState {
 const plugins = [
 	createPersistence({
 		key: packageJson.path,
-		storage: {
-			getItem: key => ls.get(key),
-			setItem: (key, value) => ls.set(key, value),
-			removeItem: key => ls.remove(key),
-		},
+		storage: storageHandler,
 		paths: ['home'],
 	}),
 ];

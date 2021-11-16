@@ -9,7 +9,8 @@ const ls = new SecureLS({
 });
 
 export const storageHandler = {
-	setItem: (key: string, value: string) => ls.set(key, value),
-	getItem: (key: string): string | null => ls.get(key),
-	removeItem: (key: string) => ls.remove(key),
-}
+	setItem: (key: string, data: any): void => ls.set(key, data),
+	getItem: (key: string): any => ls.get(key),
+	removeItem: (key: string): void => ls.remove(key),
+	clear: (): void => ls.clear(),
+};

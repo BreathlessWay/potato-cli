@@ -1,6 +1,6 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 
-import { storageHandler } from '@/store/secure';
+import { storageHandler } from '@/utils/secure';
 
 import { PersistOptions } from 'pinia-plugin-persist';
 

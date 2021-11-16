@@ -73,7 +73,7 @@ export const FileNeedRemove = {
 		HtmlTemplatePath[EProjectCli.VITE][EProjectType.WEB],
 	],
 	[EProjectStore.PINIA]: ['src/hooks/store.ts', 'src/store/home'],
-	[EProjectStore.VUEX]: ['src/store/secure.ts', 'src/store/home.ts'],
+	[EProjectStore.VUEX]: ['src/store/home.ts'],
 	[EProjectHttp.AXIOS]: [
 		'.graphqlconfig',
 		'apollo.config.js',
