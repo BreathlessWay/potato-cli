@@ -101,7 +101,7 @@ const errorLink = onError(error => {
 const cache = new InMemoryCache();
 
 // 创建 apollo 客户端
-export const apolloClient = new ApolloClient({
+const apolloClient = new ApolloClient({
 	link: from([beforeLink, afterLink, errorLink, httpLink]),
 	cache,
 	// Provide some optional constructor fields

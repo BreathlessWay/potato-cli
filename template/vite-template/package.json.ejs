@@ -12,10 +12,10 @@
         "start:uat": "vite --mode uat",
         "start:pre": "vite --mode pre",
         "start:prod": "vite --mode prod",
-        "build:dev": "node scripts/generateVersion.js dev",
-        "build:uat": "node scripts/generateVersion.js uat",
-        "build:pre": "node scripts/generateVersion.js pre",
-        "build:prod": "node scripts/generateVersion.js prod",
+        "build:dev": "node scripts/generateVersion.js --mode dev",
+        "build:uat": "node scripts/generateVersion.js --mode uat",
+        "build:pre": "node scripts/generateVersion.js --mode pre",
+        "build:prod": "node scripts/generateVersion.js --mode prod",
         "gen:dev": "npm run build -- --mode dev",
         "gen:uat": "npm run build -- --mode uat",
         "gen:pre": "npm run build -- --mode pre",
@@ -30,25 +30,24 @@
         "tree": "echo '```' > tree.md && tree >> tree.md -I 'node_modules' -F",
         "analyze": "cross-env ANALYZE=true npm run build:prod",
         "prepare": "husky install && chmod 700 .husky/*"<% if(ProjectHttp==='graphql') {%>,
-        "schema": "apollo-codegen introspect-schema http://xx.xx.xx.xx:xx/graphql --output schema.json",
-        "type": "apollo-codegen generate src/apis/**/*.graphql --schema schema.json --target typescript --output src/apis/type.ts"<% } %>
-	},
+        "type": "node scripts/generateType.js --mode uat"<% } %>
+    },
 	"dependencies": {<%
         if(ProjectHttp==='graphql') {%>
-        "@apollo/client": "3.4.16",
+        "@apollo/client": "3.4.17",
         "@vue/apollo-composable": "4.0.0-alpha.15",
         "@vue/apollo-util": "4.0.0-alpha.15",<% } %><%
         if(ProjectHttp==='axios') {%>
-        "axios": "0.23.0",<% } %>
+        "axios": "0.24.0",<% } %>
         "classnames": "2.3.1",
-        "core-js": "3.18.3",
+        "core-js": "3.19.1",
         "dayjs": "1.10.7",<%
         if(ProjectHttp==='graphql') {%>
-        "graphql": "16.0.0",
-        "graphql-tag": "2.12.5",<% } %>
+        "graphql": "16.0.1",
+        "graphql-tag": "2.12.6",<% } %>
         "lodash-es": "4.17.21",<%
         if(ProjectStore==='pinia') {%>
-        "pinia": "2.0.0-rc.14",
+        "pinia": "2.0.4",
         "pinia-plugin-persist": "0.0.92",<% } %>
         "qs": "6.10.1",
         "secure-ls": "1.2.6",<%
@@ -85,7 +84,7 @@
         "eslint-plugin-prettier": "^3.4.0",
         "eslint-plugin-vue": "^7.17.0",
         "husky": "^7.0.2",<%
-        if (CSS == 'less') { %>
+        if (CSS==='less') { %>
         "less": "^4.1.1",<% } %>
         "lint-staged": "^11.1.2",
         "postcss-preset-env": "^6.7.0",<%
@@ -94,22 +93,23 @@
         "postcss-viewport-units": "^0.1.6",<% } %>
         "prettier": "^2.4.0",
         "rimraf": "^3.0.2",
-        "rollup-plugin-visualizer": "^5.5.2",<%
-        if (CSS == 'scss') { %>
+        "rollup-plugin-visualizer": "^5.5.2",<% if(ProjectHttp==='graphql') {%>
+        "shelljs": "^0.8.4",<% } %><% if (CSS==='scss') { %>
         "sass": "^1.40.0",<% } %>
         "start-server-and-test": "^1.14.0",
         "stylelint": "^13.0.0",
         "stylelint-config-prettier": "^8.0.2",
         "stylelint-config-recess-order": "^2.5.0",
         "stylelint-config-standard": "^22.0.0",<%
-        if (CSS == 'scss') { %>
+        if (CSS==='scss') { %>
         "stylelint-scss": "^3.21.0",<% } %>
-        "typescript": "^4.4.3",
-        "vite": "^2.6.4",
+        "typescript": "^4.5.2",
+        "vite": "^2.6.14",
         "vite-plugin-checker": "^0.3.4",
         "vite-plugin-html": "^2.1.1",
         "vite-plugin-style-import": "^1.2.1",
-        "vue-tsc": "^0.3.0"
+        "vue-tsc": "^0.3.0",
+        "yargs": "^17.2.1"
 	},
     "engines": {
         "node": ">=14.14.0",

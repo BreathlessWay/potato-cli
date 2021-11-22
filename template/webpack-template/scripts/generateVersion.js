@@ -1,6 +1,8 @@
-const { spawn } = require('child_process');
+const { spawn } = require('child_process'),
+	yargs = require('yargs/yargs'),
+	{ hideBin } = require('yargs/helpers');
 
-const targetEnv = process.argv[2];
+const argv = yargs(hideBin(process.argv)).argv;
 
 const dateFormat = function (date, fmt) {
 	const o = {
@@ -29,8 +31,9 @@ const dateFormat = function (date, fmt) {
 
 const buildDate = dateFormat(new Date(), 'yyyy-MM-dd HH:mm:ss');
 
-process.env.VUE_APP_BUILD_DATE = buildDate;
-const buildScript = spawn(`npm`, ['run', `gen:${targetEnv}`]);
+process.env.VITE_APP_BUILD_DATE = buildDate;
+
+const buildScript = spawn(`npm`, ['run', `gen:${argv.mode}`]);
 
 buildScript.stdout.on('data', data => {
 	console.log(data.toString());

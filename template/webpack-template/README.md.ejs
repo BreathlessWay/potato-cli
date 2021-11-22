@@ -28,7 +28,8 @@
 8. `npm run eject`: 输出当前 webpack 的配置信息
 9. `npm run tree`: 输出目录结构，依赖命令行 tree(可用 brew install tree 安装)
 10. `npm run spm`: 分析构建耗时
-11. `npm run analyze`: 分析输出文件的大小
+11. `npm run analyze`: 分析输出文件的大小<% if(ProjectHttp==='graphql') {%>
+12. `npm run type`: 调用 `graphql` 接口生成 `schema.json` 文件，然后根据 `api` 目录下定义的 `xxx.graphql` 文件生成类型文件 `type.ts`<% } %>
 
 ## 使用提示
 

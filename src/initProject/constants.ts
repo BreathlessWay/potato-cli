@@ -81,6 +81,7 @@ export const FileNeedRemove = {
 		'src/hooks/query.ts',
 		'src/apis/type.ts',
 		'src/apis/home',
+		'scripts/generateType.js',
 	],
 	[EProjectHttp.GRAPHQL]: [
 		'src/utils/axios-register.ts',

@@ -34,11 +34,11 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
 		clearScreen: false,
 		css: {
 			preprocessorOptions: {<%
-                if (CSS == 'scss') { %>
+                if (CSS==='scss') { %>
                 scss: {
 					additionalData: `$pre-color: red;`,
 				},<% } %><%
-                if (CSS == 'less') { %>
+                if (CSS==='less') { %>
                 less: {
 					modifyVars: ``,
 					javascriptEnabled: true,
