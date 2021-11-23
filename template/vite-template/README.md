@@ -48,9 +48,7 @@
 
 1. 根据后端 `schema` 以及查询条件自动生成类型文件
 	- `npm install -g apollo-codegen`：全局安装代码生成器，**必须全局安装**
-	- `npm run schema`：获取后端定义的 `schema`
-	- `npm run type`：根据 `.graphql` 文件生成类型文件 `type.ts`
-2. [Vue Apollo](https://v4.apollo.vuejs.org/zh-cn/guide-composable/)
+2. [Vue Apollo](https://v4.apollo.vuejs.org/zh-cn/guide-composable/) & [Apollo-Client](https://www.apollographql.com/docs/react/)
 3. 查询 `api` 都在 `src/apis` 目录下
 	- `index.ts`：查询接口调用文件
 	- `*.graphql`：查询所使用的 `graphql` 语句，主要用来在编辑器中直接启动，调试接口，生成类型
