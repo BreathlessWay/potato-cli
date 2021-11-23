@@ -26,7 +26,6 @@
    - 组件属性可以参考 [组件设计模式-原子化设计](https://atomicdesign.bradfrost.com/table-of-contents/)
    - 组件类型可以选择 `TSX`（推荐）和 `SFC`（单文件组件即 `.vue` 文件）
    - 组件样式模块化在 `TSX` 文件下使用 `css-module` ，在 SFC 下使用 `scoped`
-   - 暂不支持自定义组件路径
 2. `potato -ar <routerName>` : 创建路由
    - 支持创建新的路由文件，当路由文件已存在时会在已有路由文件中添加子路由
    - 添加子路由通过 `babel` 解析注入

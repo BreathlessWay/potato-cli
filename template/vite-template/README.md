@@ -23,7 +23,7 @@
    - **以上两种方式二选一，不可混用**
 2. `/src/assets/styles` 目录下以 `global` 开头的样式文件会通过 `vite-plugin-global-style` 自动引入，无需手动引入，所以比如变量，`mixin` 等可以直接使用
 3. 推荐使用 `tsx` 开发，`SFC` 也可以，但不推荐，可以用 [classnames](https://www.npmjs.com/package/classnames) 进行类名组合
-   - `SFC` 中类型推断极弱，建议使用 `TSX`，如执意用 `SFC` ，建议将 `script` 外置，通过 `src` 引入
+   - `SFC` 中类型推断较弱，建议使用 `TSX`
 4. 当不使用 `SFC` 时，相应的 `<style scoped>` 也就无法使用了，推荐使用 `css-module`，创建 `xxx.module.less/scss/css` 即可使用
 
    ```
