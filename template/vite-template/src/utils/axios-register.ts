@@ -247,6 +247,7 @@ const axiosRegister = (
 			if (response?.config?.method === 'get') {
 				const cache = getCacheMap.get(key);
 				!cache &&
+				response.config.expire &&
 				getCacheMap.set(key, {
 					expire: getTargetDate(response.config.expire),
 					result: response,
@@ -254,15 +255,11 @@ const axiosRegister = (
 			}
 
 			// Do something with response data
-			if (+(response?.data as Record<any, any>)?.code === 200) {
-				const { headers, config, data } = response;
+			if (+response?.data?.code === 200) {
+				const { config, data } = response;
 				removeCancel(config);
 
-				return {
-					data,
-					headers,
-					config,
-				};
+				return data;
 			}
 			await failHandler(response, 'response-fulfilled');
 			throw response;

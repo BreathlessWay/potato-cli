@@ -84,7 +84,7 @@ const getTargetDate = (expire?: number | string) => {
  * @param {AuthHook} [params.authHook] - 权限处理方法，当不传递时会有默认处理行为但不推荐，传false关闭权限钩子
  * @param {PromiseCallback} params.requestFailHook - 全局错误处理函数
  * @returns void
- * @author BreathlessWay 2021/10/27
+ * @author zhujian 2021/10/27
  */
 const axiosRegister = (
 	params: {
@@ -247,6 +247,7 @@ const axiosRegister = (
 			if (response?.config?.method === 'get') {
 				const cache = getCacheMap.get(key);
 				!cache &&
+				response.config.expire &&
 				getCacheMap.set(key, {
 					expire: getTargetDate(response.config.expire),
 					result: response,
@@ -254,15 +255,11 @@ const axiosRegister = (
 			}
 
 			// Do something with response data
-			if (+(response?.data as Record<any, any>)?.code === 200) {
-				const { headers, config, data } = response;
+			if (+response?.data?.code === 200) {
+				const { config, data } = response;
 				removeCancel(config);
 
-				return {
-					data,
-					headers,
-					config,
-				};
+				return data;
 			}
 			await failHandler(response, 'response-fulfilled');
 			throw response;
